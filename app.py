@@ -1,12 +1,16 @@
 from flask import Flask, render_template, request, jsonify
 import openai
+import os
 
 app = Flask(__name__)
 
-# Menggunakan Emergent Universal LLM Key
+# Mengambil konfigurasi dari Environment Variables (Lebih Aman)
+API_KEY = os.environ.get('AI_API_KEY', 'masukkan_key_disini')
+BASE_URL = os.environ.get('AI_BASE_URL', 'https://api.openai.com/v1')
+
 client = openai.OpenAI(
-    api_key="sk-emergent-0Bc13CdEe776eDa793",
-    base_url="https://integrations.emergentagent.com/llm"
+    api_key=API_KEY,
+    base_url=BASE_URL
 )
 
 @app.route('/')
@@ -21,7 +25,7 @@ def ai_response():
 
     try:
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-3.5-turbo", # Menggunakan model yang lebih umum
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_msg}
