@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # Mengambil konfigurasi dari Environment Variables (Lebih Aman)
-API_KEY = os.environ.get('AI_API_KEY', 'masukkan_key_disini')
+API_KEY = os.environ.get('AI_API_KEY', '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')
 BASE_URL = os.environ.get('AI_BASE_URL', 'https://api.openai.com/v1')
 
 client = openai.OpenAI(
